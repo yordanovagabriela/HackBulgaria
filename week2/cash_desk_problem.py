@@ -24,12 +24,12 @@ second_bill = Bill(50)
 
 money_holder = {}
 
-money_holder[a] = 1 # We have one 10% bill
+money_holder[new_bill] = 1  # We have one 10% bill
 
-if c in money_holder:
-    money_holder[c] += 1
+if new_bill in money_holder:
+    money_holder[new_bill] += 1
 
-print(money_holder) # { "A 10$ bill": 2 }
+print(money_holder)  # { "A 10$ bill": 2 }
 print(str(new_bill))
 print(int(new_bill))
 print(new_bill)
@@ -37,14 +37,17 @@ print(new_bill == second_bill)
 print(hash(new_bill))
 
 
-
 class BatchBill(Bill):
-    def __init__(self,bills):
+
+    def __init__(self, bills):
         self.bills = bills
+
     def __len__(self):
         return len(bills)
+
     def total(self):
         return sum(bills)
+
     def __getitem__(self, index):
         return self.bills[index]
 
@@ -56,18 +59,21 @@ batch = BatchBill(bills)
 for bill in batch:
     print(bill)
 
+
 class CashDesk():
+
     def __init__(self):
         self.desk = []
 
-
     def take_money(self, money):
         self.desk.append(money)
+
     def total(self):
         total_sum = 0
         for money in self.desk:
             total_sum += int(money)
         return total_sum
+
     def inspect(self):
         for batch in self.desk:
             for bill in batch:
@@ -80,5 +86,5 @@ batch = BatchBill(bills)
 desk = CashDesk()
 desk.take_money(batch)
 desk.take_money(Bill(10))
-print(desk.total()) # 390
+print(desk.total())  # 390
 desk.inspect()
