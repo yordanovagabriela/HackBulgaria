@@ -24,5 +24,6 @@ class BillTest(unittest.TestCase):
         def test_eq(self):
             my_other_bill = Bill(5)
             self.assertTrue(self.my_bill == my_other_bill)
+
 if __name__ == '__main__':
     unittest.main()
