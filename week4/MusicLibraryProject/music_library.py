@@ -148,27 +148,13 @@ class Playlist:
             t.add_row([song.artist, song.title, song.length])
         print(t)
 
-    def save(self):
-        save_data = {}
-        c = 0
-        for song in self.playlist:
-            asong = "Song(%s, %s, %s)" % (song.artist, song.title, song.length)
-            save_data[c] = asong
-            c += 1
-        file_name = "%s.json" % (self.name)
-        with open(file_name, 'w') as outfile:
-            json.dump(save_data, outfile, indent=4)
-
-one = Song("GABI", "CC", "VV", '2:44')
-two = Song("GABI", "CCbgb", "VVbg", '3:44')
-three = Song("GABI", "CgbgC", "VVbgb", '5:44')
-four = Song("moni", "fdf", "fd", '5:14')
-new_playlist = Playlist("gabi")
-new_playlist.add_song(one)
-new_playlist.add_song(two)
-new_playlist.add_song(three)
-new_playlist.add_song(four)
-print(new_playlist.next_song())
-print(new_playlist.next_song())
-print(new_playlist.next_song())
-print(new_playlist.next_song())
+    # def save(self):
+    #     save_data = {}
+    #     c = 0
+    #     for song in self.playlist:
+    #         asong = "Song(%s, %s, %s)" % (song.artist, song.title, song.length)
+    #         save_data[c] = asong
+    #         c += 1
+    #     file_name = "%s.json" % (self.name)
+    #     with open(file_name, 'w') as outfile:
+    #         json.dump(save_data, outfile, indent=4)
