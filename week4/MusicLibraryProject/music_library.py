@@ -137,7 +137,6 @@ class Playlist:
             except:
                 raise NoMoreSongs("There are no more songs in the playlist!")
 
-
     def total_length(self):
         sum_seconds = sum([song.length_print(seconds=True) for song in self.playlist])
         return str(datetime.timedelta(seconds=sum_seconds))

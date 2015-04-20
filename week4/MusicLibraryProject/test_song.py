@@ -12,10 +12,10 @@ class TestSong(unittest.TestCase):
     def test_init(self):
         self.assertTrue(isinstance(self.song, Song))
 
-    # def test_validity_length(self):
-    #     wrong_song = Song("2pac", "Greatest Hits", "Hit Em Up", '2')
-    #     with self.assertRaises(ValueError):
-    #         wrong_song
+    def test_validity_length(self):
+        wrong_song = Song("2pac", "Greatest Hits", "Hit Em Up", '2')
+        with self.assertRaises(ValueError):
+            self.assertTrue(isinstance(wrong_song, Song))
 
     def test_get_seconds(self):
         self.assertEqual(self.song.get_seconds(), 174)
