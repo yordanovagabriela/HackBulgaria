@@ -147,6 +147,23 @@ class Playlist:
             t.add_row([song.artist, song.title, song.length])
         print(t)
 
+    def save(self, filename):
+        with open(filename, "w++") as f:
+
+
+    def serialize_to(path, data):
+        json_string = json.dumps(data, indent=4)
+
+    with open(path, "w") as f:
+        f.write(json_string)
+
+
+    def unserialize_from(path):
+        with open(path, "r") as f:
+            contents = f.read()
+
+        return json.loads(contents)
+
     # def save(self):
     #     save_data = {}
     #     c = 0
