@@ -147,30 +147,48 @@ class Playlist:
             t.add_row([song.artist, song.title, song.length])
         print(t)
 
-    def save(self, filename):
-        with open(filename, "w++") as f:
+    def prepare_json(self):
+        data = {
+            "name": self.name,
+            "songs": [song.prepare_json() for song in self.playlist]
+        }
 
+        return data
 
-    def serialize_to(path, data):
-        json_string = json.dumps(data, indent=4)
+    def save(self, indent=True):
+        filename = self.name.replace(" ", "-") + ".json"
 
-    with open(path, "w") as f:
-        f.write(json_string)
+        with open(filename, "w") as f:
+            f.write(json.dumps(self.prepare_json(), indent=indent))
 
-
-    def unserialize_from(path):
-        with open(path, "r") as f:
+    @staticmethod
+    def load(filename):
+        with open(filename, "r") as f:
             contents = f.read()
+            data = json.loads(contents)
+            p = Playlist(data["name"])
 
-        return json.loads(contents)
+            for dict_song in data["songs"]:
+                song = Song(artist=dict_song["artist"], title=dict_song["title"], album=dict_song["album"], length=dict_song["length"])
+                p.add_song(song)
 
-    # def save(self):
-    #     save_data = {}
-    #     c = 0
-    #     for song in self.playlist:
-    #         asong = "Song(%s, %s, %s)" % (song.artist, song.title, song.length)
-    #         save_data[c] = asong
-    #         c += 1
-    #     file_name = "%s.json" % (self.name)
-    #     with open(file_name, 'w') as outfile:
-    #         json.dump(save_data, outfile, indent=4)
+            return p
+
+
+def normalize(filename):
+    filename_list = filename.split(' ')
+    result = '-'.join(filename_list)
+
+    return result
+pl = Playlist("new")
+s = Song(artist="m", title="mm", album="jkjk", length="3:15")
+s1 = Song(artist="m", title="mm", album="jkjk", length="3:35")
+s2 = Song(artist="m", title="mm", album="jkj4k", length="4:15")
+s3 = Song(artist="m", title="m44m", album="jkj566k", length="5:15")
+s4 = Song(artist="m", title="mm", album="jkj5k", length="7:15")
+pl.add_song(s)
+pl.add_song(s1)
+pl.add_song(s2)
+pl.add_song(s3)
+pl.add_song(s4)
+pl.save('new playlist')
