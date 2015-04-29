@@ -1,3 +1,6 @@
+from Graph import DirectedGraph
+
+
 def build_network(start, level):
     visited = set()
     queue = []
@@ -7,11 +10,11 @@ def build_network(start, level):
         current_level, current_node = queue.pop(0)
         if current_level > level:
             break
-        network = get_network_for(cn)
+        network = get_neighbour_for(current_node)
         for follower in network["folowers"]:
             if follower not in visited:
-                g.add_edge(follower, cn)
+                queue.add_edge(follower, current_node)
                 visited.add(follower)
-                queue.append((cl+1, follower))
+                queue.append((current_level+1, follower))
 
                 # g.add_edge((cn, following))
