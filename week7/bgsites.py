@@ -1,7 +1,4 @@
-import httplib2
-
-
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup
 
 
 import requests
@@ -9,22 +6,6 @@ import requests
 
 import json
 
-
-class Histogram:
-    def __init__(self):
-        self.items = {}
-
-    def add(self, word):
-        if word not in self.items:
-            self.items[word] = 1
-        else:
-            self.items[word] += 1
-
-    def count(self, word):
-        return self.items[word]
-
-    def get_dict(self):
-        return self.items
 
 our_headers = {
  "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
@@ -39,7 +20,7 @@ urls = [link.get('href') for link in soup.find_all('a') if((link.get('href')) !=
 #find the actual location of the links
 actual_location = []
 for url in urls:
-    req = requests.head('http://register.start.bg/{}'.format(url), headers=our_headers, timeout=200)
+    req = requests.head('http://register.start.bg/{}'.format(url), headers=our_headers, timeout=4)
     actual_location.append(req.headers["Location"])
 
 
