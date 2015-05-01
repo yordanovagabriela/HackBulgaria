@@ -7,10 +7,11 @@ def generate_integers():
     number = int(sys.argv[2])
     text_file = sys.argv[1]
     f = open(text_file, "w")
-    lst = []
+    contents = []
     for i in range(1, number):
-        lst.append(randint(1, number))
-    f.write(",".join(map(str, lst)))
+        contents.append(randint(1, number))
+    f.write(",".join(map(str, contents)))
+    f.write("\n")
     f.close()
 
 if __name__ == '__main__':
