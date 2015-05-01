@@ -1,9 +1,12 @@
-def get_size(path):
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(path):
-        for f in filenames:
-            if os.path.exists(fp):
-                fp = os.path.join(dirpath, f)
-                total_size += os.path.getsize(fp)
+import os
 
-    return total_size
+
+def total_size(source):
+        total_size = os.path.getsize(source)
+        for item in os.listdir(source):
+            itempath = os.path.join(source, item)
+            if os.path.isfile(itempath):
+                total_size += os.path.getsize(itempath)
+            elif os.path.isdir(itempath):
+                total_size += total_size(itempath)
+        return total_size

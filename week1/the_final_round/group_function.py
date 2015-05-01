@@ -11,4 +11,4 @@ def group(lst):
             op.append(lst[i + 1])
     result.append(op)
     return result
-print(group([1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3,4,5,5]))
+print(group([1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 4, 5, 5]))

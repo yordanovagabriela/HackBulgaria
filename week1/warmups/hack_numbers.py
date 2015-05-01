@@ -1,7 +1,11 @@
 def palindrome(obj):
     return str(obj) == str(obj)[::-1]
+
+
 def odd_ones(binary):
     return (bin(binary).count("1")) % 2 != 0
+
+
 def next_hack(n):
     i = n + 1
     while(n):
