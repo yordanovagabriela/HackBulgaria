@@ -1,5 +1,7 @@
 import re
 
+import json
+
 
 from graph import bfs
 
@@ -108,3 +110,20 @@ class PandaSocialNetwork:
             if panda_user != panda and current_connection_level <= level and panda_user.gender() ==gender:
                 count += 1
         return count
+
+    def __repr__(self):
+        save_dict = {}
+
+        for panda in self.panda_friends:
+            friends = [repr(panda_friend) for panda_friend in self.panda_friends[panda]]
+            save_dict[repr(panda)] = friends
+
+            return json.dumps(save_dict, indent=True)
+
+    def save(self, filename):
+        with open(filename, "w") as f:
+            f.write(self.__repr__())
+
+    @staticmethod
+    def load(filename):
+        pass
