@@ -48,7 +48,6 @@ class CompanyManager:
         self.cursor.execute('DELETE FROM employees WHERE id = ?', (id_number))
         self.conn.commit()
 
-
     def update_employee(self, id_number, name, monthly_salary, yearly_bonus, position):
         self.cursor.execute("""UPDATE employees SET name = ?,
                                           monthly_salary = ?,
