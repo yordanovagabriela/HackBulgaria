@@ -14,6 +14,10 @@ class PandasAlreadyFriends(Exception):
     pass
 
 
+class InvalidEmail(Exception):
+    pass
+
+
 class Panda:
 
     def __init__(self, name, email, gender):
@@ -50,7 +54,7 @@ class Panda:
 
 def ValidateEmail(email):
     if re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email) == None:
-        return False
+        return InvalidEmail
     else:
         return re.search('([^@|\s]+@[^@]+\.[^@|\s]+)', email).group() == email
 
