@@ -1,0 +1,32 @@
+{
+ "name": "Manowar songs",
+ "songs": [
+  {
+   "album": "The Sons of Odin",
+   "title": "Odin",
+   "seconds": 44,
+   "hours": 0,
+   "length": "3:44",
+   "minutes": 3,
+   "artist": "Manowar"
+  },
+  {
+   "album": "The Sonds of Odin",
+   "title": "Sons of Odin",
+   "seconds": 8,
+   "hours": 0,
+   "length": "6:08",
+   "minutes": 6,
+   "artist": "Manowar"
+  },
+  {
+   "album": "Fallen",
+   "title": "Bring Me To Life (radio edit)",
+   "seconds": 30,
+   "hours": 0,
+   "length": "3:30",
+   "minutes": 3,
+   "artist": "Evanesence"
+  }
+ ]
+}

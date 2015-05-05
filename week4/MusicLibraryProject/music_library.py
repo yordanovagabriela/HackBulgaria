@@ -10,6 +10,9 @@ import json
 import random
 
 
+import time
+
+
 class NoMoreSongs(Exception):
     pass
 
@@ -63,7 +66,7 @@ class Song:
         return is_artist and is_title and is_album and is_length
 
     def __hash__(self):
-        return hash(self.title)
+        return hash(self.__str__())
 
     def length_print(self, seconds=False, minutes=False, hours=False):
         if not seconds and not minutes and not hours:
@@ -74,6 +77,10 @@ class Song:
             return self.get_minutes()
         if seconds:
             return self.get_seconds()
+
+    def prepare_json(self):
+        song_dict = self.__dict__
+        return {key: song_dict[key] for key in song_dict if not key.startswith("_")}
 
 
 class Playlist:
@@ -88,14 +95,15 @@ class Playlist:
         self.shuffle_songs = set()
 
     def add_song(self, song):
-        if song in self.playlist:
-            raise SongAlreadyInPlaylist("The song is already in the playlist")
-        else:
-            self.playlist.append(song)
-            if song.artist in self.artist_dict:
-                self.artist_dict[song.artist] += 1
-            else:
-                self.artist_dict[song.artist] = 1
+# MusicCrawler gets error ?
+        # if song in self.playlist:
+        #     raise SongAlreadyInPlaylist("The song is already in the playlist")
+        # else:
+        self.playlist.append(song)
+            # if song.artist in self.artist_dict:
+            #     self.artist_dict[song.artist] += 1
+            # else:
+            #     self.artist_dict[song.artist] = 1
 
     def remove_song(self, song):
         self.playlist.remove(song)
@@ -157,13 +165,12 @@ class Playlist:
 
     def save(self, indent=True):
         filename = self.name.replace(" ", "-") + ".json"
-
-        with open(filename, "w") as f:
+        with open(filename, "w+") as f:
             f.write(json.dumps(self.prepare_json(), indent=indent))
 
     @staticmethod
     def load(filename):
-        with open(filename, "r") as f:
+        with open('./playlist-data/' + filename, "r") as f:
             contents = f.read()
             data = json.loads(contents)
             p = Playlist(data["name"])
@@ -175,20 +182,22 @@ class Playlist:
             return p
 
 
-def normalize(filename):
-    filename_list = filename.split(' ')
-    result = '-'.join(filename_list)
+def test_load():
+    p = Playlist.load("Manowar-songs.json")
+    try:
+        while True:
+            song = p.next_song()
+            print(str(song))
+            time.sleep(1)
+    except Exception as e:
+        print(e)
 
-    return result
-pl = Playlist("new")
-s = Song(artist="m", title="mm", album="jkjk", length="3:15")
-s1 = Song(artist="m", title="mm", album="jkjk", length="3:35")
-s2 = Song(artist="m", title="mm", album="jkj4k", length="4:15")
-s3 = Song(artist="m", title="m44m", album="jkj566k", length="5:15")
-s4 = Song(artist="m", title="mm", album="jkj5k", length="7:15")
-pl.add_song(s)
-pl.add_song(s1)
-pl.add_song(s2)
-pl.add_song(s3)
-pl.add_song(s4)
-pl.save('new playlist')
+
+s = Song(album="The Sons of Odin", title="Odin", artist="Manowar", length="3:44")
+s1 = Song(album="The Sonds of Odin", title="Sons of Odin", artist="Manowar", length="6:08")
+p = Playlist("Manowar songs", repeat="SONG")
+p.add_song(s)
+p.add_song(s1)
+p.add_song(Song(album="Fallen", title="Bring Me To Life (radio edit)", artist="Evanesence", length="3:30"))
+p.pprint_playlist()
+p.save()
