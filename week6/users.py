@@ -19,6 +19,3 @@ class User:
         self.followers = requests.get(self.followers_url).json()
         self.following = requests.get(self.following_url).json()
         self.graph = DirectedGraph(username)
-
-
-    def

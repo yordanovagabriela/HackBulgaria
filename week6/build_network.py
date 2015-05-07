@@ -10,7 +10,7 @@ def build_network(start, level):
         current_level, current_node = queue.pop(0)
         if current_level > level:
             break
-        network = get_neighbour_for(current_node)
+        network = self.get_neighbour_for(current_node)
         for follower in network["folowers"]:
             if follower not in visited:
                 queue.add_edge(follower, current_node)
