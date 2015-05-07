@@ -7,7 +7,9 @@ class ConsoleInterface:
         self.commands = {
             "read_command": self.read_command,
             "list_students": self.list_students,
-            "list_courses": self.list_courses
+            "list_courses": self.list_courses,
+            "list_students_courses": self.list_students_courses,
+            "list_greatest_students": self.list_greatest_students
         }
 
     def read_command(self):
@@ -26,3 +28,12 @@ class ConsoleInterface:
         courses = self.database.list_courses()
         for course in courses:
             print(course['name'])
+
+    def list_students_courses(self):
+        info = self.database.list_students_courses()
+
+        for student in info:
+            print('{} - {}'.format(student, ', '.join(info[student])))
+
+    def list_greatest_students(self):
+        pass

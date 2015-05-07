@@ -78,4 +78,23 @@ class DataManager:
         return self.cursor.execute('SELECT name FROM courses')
 
     def list_students_courses(self):
-        # return self.cursor.execute('SELECT name FROM students JOIN  ')
+        content = self.cursor.execute(""" SELECT students.name as s_name, courses.name as c_name FROM
+            students, courses JOIN students_to_courses ON
+            students_to_courses.student_id = students.student_id
+            and students_to_courses.course_id = courses.course_id
+            """)
+
+        student_name = 's_name'
+        course_name = 'c_name'
+        info = {}
+
+        for item in content:
+            if item[student_name] not in info:
+                info[item[student_name]] = [item[course_name]]
+            else:
+                info[item[student_name]] += [item[course_name]]
+
+        return info
+
+    def list_greatest_students(self):
+        pass
