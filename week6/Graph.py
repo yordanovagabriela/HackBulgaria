@@ -17,7 +17,6 @@ class DirectedGraph:
     def get_neighbour_for(self, node):
         return self.connections[node]
 
-# from panda_network
     def path_between(self, node_a, node_b):
         visited = set()
         queue = []
@@ -47,10 +46,3 @@ class DirectedGraph:
         if path_length != 0:
             return True
         return False
-
-g = Graph()
-g.add_edge('A', 'D')
-g.add_edge('A', 'C')
-g.add_edge('C', 'E')
-g.add_edge('E', 'F')
-g.add_edge('F','C')
